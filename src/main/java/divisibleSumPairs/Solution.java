@@ -1,16 +1,10 @@
 package divisibleSumPairs;
-
-import java.io.*;
 import java.util.*;
-import java.util.stream.*;
-
-import static java.util.stream.Collectors.toList;
-
 
 /*
 Given an array of integers ar and a positive integer k, determine the number of pairs (i, j) where i < j and ar[i] + ar[j] is divisible by k.
  */
-class Result {
+public class Solution {
 
     /*
      * Complete the 'divisibleSumPairs' function below.
@@ -36,29 +30,4 @@ class Result {
         return counter;
     }
 
-}
-
-public class Solution {
-    public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
-
-        String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
-
-        int n = Integer.parseInt(firstMultipleInput[0]);
-
-        int k = Integer.parseInt(firstMultipleInput[1]);
-
-        List<Integer> ar = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
-                .map(Integer::parseInt)
-                .collect(toList());
-
-        int result = Result.divisibleSumPairs(n, k, ar);
-
-        bufferedWriter.write(String.valueOf(result));
-        bufferedWriter.newLine();
-
-        bufferedReader.close();
-        bufferedWriter.close();
-    }
 }
