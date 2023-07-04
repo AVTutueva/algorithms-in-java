@@ -1,4 +1,4 @@
-package veriBigSum;
+package veryBigSum;
 
 import java.util.*;
 
