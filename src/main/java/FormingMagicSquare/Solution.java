@@ -8,6 +8,42 @@ Given s, convert it into a magic square at minimal cost. Print this cost on a ne
 
 import java.util.*;
 
+class MagicSquare {
+    private int[][] magicSquare;
+    private int size;
+
+    MagicSquare(List<List<Integer>> square, int size) {
+        this.magicSquare = new int[size][size];
+        this.size = size;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                this.magicSquare[i][j] = square.get(i).get(j);
+            }
+        }
+    }
+
+    MagicSquare(ArrayList<Integer> square, int size) {
+        this.magicSquare = new int[size][size];
+        this.size = size;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                this.magicSquare[i][j] = square.get(this.size * i + j);
+            }
+        }
+    }
+
+
+    public int compareTo(MagicSquare squareToCompare) {
+        int costs = 0;
+        for (int i = 0; i < this.size; i++) {
+            for (int j = 0; j < this.size; j++) {
+                costs += Math.abs(this.magicSquare[i][j] - squareToCompare.magicSquare[i][j]);
+            }
+        }
+        return costs;
+    }
+}
+
 public class Solution {
 
     /*
@@ -18,65 +54,29 @@ public class Solution {
      */
 
     public static int formingMagicSquare(List<List<Integer>> s) {
-        List<List<List<Integer>>> allSquares = new ArrayList<>();
-        allSquares.add(List.of(
-                List.of(2, 7, 6),
-                List.of(9, 5, 1),
-                List.of(4, 3, 8)
-        ));
-        allSquares.add(List.of(
-                List.of(6, 1, 8),
-                List.of(7, 5, 3),
-                List.of(2, 9, 4)
-        ));
-        allSquares.add(List.of(
-                List.of(8, 3, 4),
-                List.of(1, 5, 9),
-                List.of(6, 7, 2)
-        ));
-        allSquares.add(List.of(
-                List.of(4, 9, 2),
-                List.of(3, 5, 7),
-                List.of(8, 1, 6)
-        ));
-        allSquares.add(List.of(
-                List.of(2, 9, 4),
-                List.of(7, 5, 3),
-                List.of(6, 1, 8)
-        ));
-        allSquares.add(List.of(
-                List.of(4, 3, 8),
-                List.of(9, 5, 1),
-                List.of(2, 7, 6)
-        ));
-        allSquares.add(List.of(
-                List.of(8, 1, 6),
-                List.of(3, 5, 7),
-                List.of(4, 9, 2)
-        ));
-        allSquares.add(List.of(
-                List.of(6, 7, 2),
-                List.of(1, 5, 9),
-                List.of(8, 3, 4)
-        ));
+
+        MagicSquare originalSquare = new MagicSquare(s, 3);
+        List<MagicSquare> allSquares = new ArrayList<>();
+
+        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(2, 7, 6, 9, 5, 1, 4, 3, 8)), 3));
+        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(6, 1, 8, 7, 5, 3, 2, 9, 4)), 3));
+        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(8, 3, 4, 1, 5, 9, 6, 7, 2)), 3));
+        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(4, 9, 2, 3, 5, 7, 8, 1, 6)), 3));
+        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(2, 9, 4, 7, 5, 3, 6, 1, 8)), 3));
+        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(4, 3, 8, 9, 5, 1, 2, 7, 6)), 3));
+        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(8, 1, 6, 3, 5, 7, 4, 9, 2)), 3));
+        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(6, 7, 2, 1, 5, 9, 8, 3, 4)), 3));
 
         int minCosts = Integer.MAX_VALUE;
 
         for (var curSquare : allSquares) {
-            int curCosts = 0;
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    curCosts += Math.abs(s.get(i).get(j) - curSquare.get(i).get(j));
-                }
-            }
+            int curCosts = originalSquare.compareTo(curSquare);
             if (curCosts < minCosts) {
                 minCosts = curCosts;
             }
         }
 
-
         return minCosts;
-
     }
 }
 
