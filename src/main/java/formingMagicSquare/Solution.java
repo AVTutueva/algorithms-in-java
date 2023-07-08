@@ -1,4 +1,4 @@
-package FormingMagicSquare;
+package formingMagicSquare;
 
 /*
 You will be given a 3x3 matrix s of integers in the inclusive range [1; 9].
@@ -10,11 +10,10 @@ import java.util.*;
 
 class MagicSquare {
     private int[][] magicSquare;
-    private int size;
 
-    MagicSquare(List<List<Integer>> square, int size) {
-        this.magicSquare = new int[size][size];
-        this.size = size;
+    MagicSquare(List<List<Integer>> square) {
+        int size = square.get(0).size();
+        this.magicSquare = new int[square.size()][square.get(0).size()];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 this.magicSquare[i][j] = square.get(i).get(j);
@@ -22,21 +21,23 @@ class MagicSquare {
         }
     }
 
-    MagicSquare(ArrayList<Integer> square, int size) {
-        this.magicSquare = new int[size][size];
-        this.size = size;
+    public static MagicSquare fromList(List<Integer> square, int size) {
+        List<List<Integer>> data = new ArrayList<>();
         for (int i = 0; i < size; i++) {
+            List<Integer> line = new ArrayList<>();
             for (int j = 0; j < size; j++) {
-                this.magicSquare[i][j] = square.get(this.size * i + j);
+                line.add(square.get(size * i + j));
             }
+            data.add(line);
         }
+        return new MagicSquare(data);
     }
 
 
     public int compareTo(MagicSquare squareToCompare) {
         int costs = 0;
-        for (int i = 0; i < this.size; i++) {
-            for (int j = 0; j < this.size; j++) {
+        for (int i = 0; i < magicSquare.length; i++) {
+            for (int j = 0; j < magicSquare.length; j++) {
                 costs += Math.abs(this.magicSquare[i][j] - squareToCompare.magicSquare[i][j]);
             }
         }
@@ -55,17 +56,17 @@ public class Solution {
 
     public static int formingMagicSquare(List<List<Integer>> s) {
 
-        MagicSquare originalSquare = new MagicSquare(s, 3);
+        MagicSquare originalSquare = new MagicSquare(s);
         List<MagicSquare> allSquares = new ArrayList<>();
 
-        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(2, 7, 6, 9, 5, 1, 4, 3, 8)), 3));
-        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(6, 1, 8, 7, 5, 3, 2, 9, 4)), 3));
-        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(8, 3, 4, 1, 5, 9, 6, 7, 2)), 3));
-        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(4, 9, 2, 3, 5, 7, 8, 1, 6)), 3));
-        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(2, 9, 4, 7, 5, 3, 6, 1, 8)), 3));
-        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(4, 3, 8, 9, 5, 1, 2, 7, 6)), 3));
-        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(8, 1, 6, 3, 5, 7, 4, 9, 2)), 3));
-        allSquares.add(new MagicSquare(new ArrayList<>(Arrays.asList(6, 7, 2, 1, 5, 9, 8, 3, 4)), 3));
+        allSquares.add(MagicSquare.fromList(Arrays.asList(2, 7, 6, 9, 5, 1, 4, 3, 8), 3));
+        allSquares.add(MagicSquare.fromList(Arrays.asList(6, 1, 8, 7, 5, 3, 2, 9, 4), 3));
+        allSquares.add(MagicSquare.fromList(Arrays.asList(8, 3, 4, 1, 5, 9, 6, 7, 2), 3));
+        allSquares.add(MagicSquare.fromList(Arrays.asList(4, 9, 2, 3, 5, 7, 8, 1, 6), 3));
+        allSquares.add(MagicSquare.fromList(Arrays.asList(2, 9, 4, 7, 5, 3, 6, 1, 8), 3));
+        allSquares.add(MagicSquare.fromList(Arrays.asList(4, 3, 8, 9, 5, 1, 2, 7, 6), 3));
+        allSquares.add(MagicSquare.fromList(Arrays.asList(8, 1, 6, 3, 5, 7, 4, 9, 2), 3));
+        allSquares.add(MagicSquare.fromList(Arrays.asList(6, 7, 2, 1, 5, 9, 8, 3, 4), 3));
 
         int minCosts = Integer.MAX_VALUE;
 
