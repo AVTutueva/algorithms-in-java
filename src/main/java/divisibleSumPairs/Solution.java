@@ -3,6 +3,8 @@ import java.util.*;
 
 /*
 Given an array of integers ar and a positive integer k, determine the number of pairs (i, j) where i < j and ar[i] + ar[j] is divisible by k.
+
+Description: https://www.hackerrank.com/challenges/divisible-sum-pairs/problem
  */
 public class Solution {
 

@@ -5,6 +5,9 @@ Reduce a string of lowercase characters in range ascii[‘a’..’z’] by doin
 In each operation, select a pair of adjacent letters that match, and delete them.
 Delete as many characters as possible using this method and return the resulting string.
 If the final string is empty, return Empty String
+
+Description:
+https://www.hackerrank.com/challenges/reduced-string/problem
  */
 
 public class Solution {

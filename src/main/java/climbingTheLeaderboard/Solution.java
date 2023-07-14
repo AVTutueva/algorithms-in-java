@@ -7,6 +7,8 @@ An arcade game player wants to climb to the top of the leaderboard and track the
 The game uses Dense Ranking, so its leaderboard works like this:
 1. The player with the highest score is ranked number  on the leaderboard.
 2. Players who have equal scores receive the same ranking number, and the next player(s) receive the immediately following ranking number.
+
+Description: https://www.hackerrank.com/challenges/climbing-the-leaderboard/problem
  */
 
 public class Solution {

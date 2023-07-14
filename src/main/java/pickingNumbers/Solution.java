@@ -7,6 +7,8 @@ Given an array of integers, find the longest subarray where the absolute differe
 Constraints:
 2 <= n <= 100
 0 < a[i] < 100
+
+Description: https://www.hackerrank.com/challenges/picking-numbers/problem
  */
 public class Solution {
 

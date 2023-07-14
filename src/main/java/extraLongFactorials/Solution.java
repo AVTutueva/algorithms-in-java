@@ -3,6 +3,8 @@ package extraLongFactorials;
 import java.math.*;
 /*
 Calculate and print the factorial of a given big integer (1 <= n <= 100).
+
+Description: https://www.hackerrank.com/challenges/extra-long-factorials/problem
  */
 
 public class Solution {
